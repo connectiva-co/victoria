@@ -11,7 +11,14 @@ export type ScreenType =
   | 'MINIGAME_MEMORY'
   | 'PAUSE';
 
-export type ContainerType = 'cono' | 'vaso' | 'copa' | 'waffle';
+export type ContainerType =
+  | 'cono'
+  | 'vaso'
+  | 'copa'
+  | 'waffle'
+  | 'canasta'
+  | 'banana_boat'
+  | 'coco';
 
 export type FlavorId =
   | 'vainilla'
@@ -21,7 +28,13 @@ export type FlavorId =
   | 'arequipe'
   | 'maracuya'
   | 'menta'
-  | 'brownie';
+  | 'brownie'
+  | 'pistacho'
+  | 'mora'
+  | 'chicle'
+  | 'cafe'
+  | 'coco_helado'
+  | 'cookies_cream';
 
 export type ToppingId =
   | 'chispas'
@@ -29,9 +42,22 @@ export type ToppingId =
   | 'galleta'
   | 'crema_batida'
   | 'waffle_crisp'
-  | 'fresa_fresca';
+  | 'fresa_fresca'
+  | 'mani'
+  | 'masmelos'
+  | 'arandanos'
+  | 'coco_rallado'
+  | 'gomitas'
+  | 'choco_chips';
 
-export type SauceId = 'chocolate' | 'arequipe' | 'fresa';
+export type SauceId =
+  | 'chocolate'
+  | 'arequipe'
+  | 'fresa'
+  | 'mora'
+  | 'leche_condensada'
+  | 'maracuya_salsa'
+  | 'pistacho_salsa';
 
 export interface FlavorInfo {
   id: FlavorId;

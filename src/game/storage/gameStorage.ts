@@ -77,11 +77,25 @@ export function loadSavedGame(): SavedGameState {
     if (!raw) return defaultState;
     const parsed = JSON.parse(raw);
 
-    // Ensure all containers are present (e.g. newly added 'waffle')
+    // Ensure all containers are present
     const savedContainers: ContainerInfo[] = Array.isArray(parsed.containers) ? parsed.containers : [];
     const mergedContainers = defaultState.containers.map((defaultC) => {
       const found = savedContainers.find((c) => c.id === defaultC.id);
-      return found || defaultC;
+      return found ? { ...defaultC, unlocked: found.unlocked || defaultC.unlocked } : defaultC;
+    });
+
+    // Ensure all flavors are present
+    const savedFlavors: FlavorInfo[] = Array.isArray(parsed.flavors) ? parsed.flavors : [];
+    const mergedFlavors = defaultState.flavors.map((defaultF) => {
+      const found = savedFlavors.find((f) => f.id === defaultF.id);
+      return found ? { ...defaultF, unlocked: found.unlocked || defaultF.unlocked } : defaultF;
+    });
+
+    // Ensure all toppings are present
+    const savedToppings: ToppingInfo[] = Array.isArray(parsed.toppings) ? parsed.toppings : [];
+    const mergedToppings = defaultState.toppings.map((defaultT) => {
+      const found = savedToppings.find((t) => t.id === defaultT.id);
+      return found ? { ...defaultT, unlocked: found.unlocked || defaultT.unlocked } : defaultT;
     });
 
     // Ensure all starter recipes are present
@@ -97,6 +111,8 @@ export function loadSavedGame(): SavedGameState {
       ...defaultState,
       ...parsed,
       containers: mergedContainers,
+      flavors: mergedFlavors,
+      toppings: mergedToppings,
       recipes: mergedRecipes,
     };
   } catch (e) {

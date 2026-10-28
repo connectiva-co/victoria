@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Recipe } from '@/src/types/game';
-import { INITIAL_FLAVORS, INITIAL_TOPPINGS, INITIAL_SAUCES } from '@/src/game/data/gameData';
+import { INITIAL_FLAVORS, INITIAL_TOPPINGS, INITIAL_SAUCES, INITIAL_CONTAINERS } from '@/src/game/data/gameData';
+import { CONTAINER_ICONS } from '@/src/game/utils/orderUtils';
 import { sound } from '@/src/game/audio/soundManager';
 import { X, BookOpen, Lock, Sparkles, Coins } from 'lucide-react';
 
@@ -27,7 +28,7 @@ export const RecipeBookModal: React.FC<RecipeBookModalProps> = ({
             <div>
               <h2 className="text-lg font-black text-slate-800">Recetario Artesanal de Victoria</h2>
               <p className="text-xs text-slate-500">
-                10 creaciones exclusivas · Nivel actual: {currentLevel}
+                {recipes.length} creaciones exclusivas · Nivel actual: {currentLevel}
               </p>
             </div>
           </div>
@@ -65,7 +66,7 @@ export const RecipeBookModal: React.FC<RecipeBookModalProps> = ({
                 >
                   <div className="flex items-center gap-2.5">
                     <span className="text-xl">
-                      {rec.container === 'cono' ? '🍦' : rec.container === 'copa' ? '🍨' : '🍧'}
+                      {CONTAINER_ICONS[rec.container] || '🍨'}
                     </span>
                     <div>
                       <div className="text-xs font-black text-slate-800 flex items-center gap-1.5">
@@ -115,11 +116,7 @@ export const RecipeBookModal: React.FC<RecipeBookModalProps> = ({
                 <div>
                   <div className="text-[10px] font-bold text-slate-400 uppercase">Recipiente</div>
                   <div className="text-xs font-bold text-slate-700 mt-0.5 capitalize">
-                    {selectedRecipe.container === 'cono'
-                      ? 'Cono de Galleta Waffle'
-                      : selectedRecipe.container === 'copa'
-                      ? 'Copa de Cristal Sundae'
-                      : 'Vaso Pastel Victoria'}
+                    {INITIAL_CONTAINERS.find((c) => c.id === selectedRecipe.container)?.name || selectedRecipe.container}
                   </div>
                 </div>
 

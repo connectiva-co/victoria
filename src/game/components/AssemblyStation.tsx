@@ -240,6 +240,9 @@ export const AssemblyStation: React.FC<AssemblyStationProps> = ({
                   vaso: '🍧',
                   copa: '🍨',
                   waffle: '🧇',
+                  canasta: '🥧',
+                  banana_boat: '🍌',
+                  coco: '🥥',
                 };
                 return (
                   <button

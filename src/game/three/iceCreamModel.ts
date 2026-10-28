@@ -133,6 +133,54 @@ export function createIceCream3D(prepared: PreparedIceCream, isSoftwareGl: boole
 
     root.add(plate, plateRim, waffleMesh, butterMesh);
     containerHeight = 0.1;
+  } else if (prepared.container === 'canasta') {
+    // Waffle Cookie Basket Bowl
+    const basketGeo = new THREE.CylinderGeometry(0.38, 0.24, 0.36, 20, 1, false);
+    const waffleMat = new THREE.MeshStandardMaterial({
+      map: createWaffleTexture(),
+      roughness: 0.75,
+      metalness: 0.05,
+    });
+    const basket = new THREE.Mesh(basketGeo, waffleMat);
+    basket.position.set(0, 0.18, 0);
+    root.add(basket);
+    containerHeight = 0.36;
+  } else if (prepared.container === 'banana_boat') {
+    // Oval Banana Split Dish + Twin Bananas
+    const dishGeo = new THREE.CylinderGeometry(0.45, 0.35, 0.12, 24);
+    const dishMat = new THREE.MeshStandardMaterial({ color: 0xfbcfe8, roughness: 0.25 });
+    const dish = new THREE.Mesh(dishGeo, dishMat);
+    dish.scale.set(1.3, 1, 0.8);
+    dish.position.set(0, 0.06, 0);
+    root.add(dish);
+
+    const bananaGeo = new THREE.TorusGeometry(0.36, 0.065, 10, 20, Math.PI * 0.85);
+    const bananaMat = new THREE.MeshStandardMaterial({ color: 0xfef08a, roughness: 0.4 });
+    const banana1 = new THREE.Mesh(bananaGeo, bananaMat);
+    banana1.rotation.set(Math.PI / 2, 0, 0.15);
+    banana1.position.set(0, 0.14, 0.16);
+
+    const banana2 = new THREE.Mesh(bananaGeo, bananaMat);
+    banana2.rotation.set(Math.PI / 2, 0, Math.PI + 0.15);
+    banana2.position.set(0, 0.14, -0.16);
+
+    root.add(banana1, banana2);
+    containerHeight = 0.14;
+  } else if (prepared.container === 'coco') {
+    // Half Coconut Shell with White Flesh Rim
+    const shellGeo = new THREE.SphereGeometry(0.36, 20, 14, 0, Math.PI * 2, Math.PI * 0.45, Math.PI * 0.55);
+    const shellMat = new THREE.MeshStandardMaterial({ color: 0x451a03, roughness: 0.9 });
+    const shell = new THREE.Mesh(shellGeo, shellMat);
+    shell.position.set(0, 0.36, 0);
+
+    const rimGeo = new THREE.TorusGeometry(0.35, 0.035, 10, 24);
+    const rimMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.3 });
+    const rim = new THREE.Mesh(rimGeo, rimMat);
+    rim.rotation.x = Math.PI / 2;
+    rim.position.set(0, 0.38, 0);
+
+    root.add(shell, rim);
+    containerHeight = 0.38;
   }
 
   // 2. Ice Cream Scoops
@@ -167,8 +215,8 @@ export function createIceCream3D(prepared: PreparedIceCream, isSoftwareGl: boole
     let xOffset = 0;
     let zOffset = 0;
 
-    if (prepared.container === 'copa' && prepared.scoops.length === 3) {
-      // 3-scoop pyramid layout in copa
+    if ((prepared.container === 'copa' || prepared.container === 'canasta' || prepared.container === 'coco') && prepared.scoops.length === 3) {
+      // 3-scoop pyramid layout
       if (index === 0) {
         xOffset = -0.12;
         yPos = containerHeight + 0.1;
@@ -179,7 +227,7 @@ export function createIceCream3D(prepared: PreparedIceCream, isSoftwareGl: boole
         xOffset = 0;
         yPos = containerHeight + 0.32;
       }
-    } else if (prepared.container === 'waffle') {
+    } else if (prepared.container === 'waffle' || prepared.container === 'banana_boat') {
       if (prepared.scoops.length === 1) {
         xOffset = 0;
         yPos = containerHeight + scoopRadius * 0.8;
@@ -215,6 +263,10 @@ export function createIceCream3D(prepared: PreparedIceCream, isSoftwareGl: boole
     let sauceColor = 0x3b1c09; // chocolate
     if (prepared.sauce === 'arequipe') sauceColor = 0xb45309;
     if (prepared.sauce === 'fresa') sauceColor = 0xe11d48;
+    if (prepared.sauce === 'mora') sauceColor = 0x7e22ce;
+    if (prepared.sauce === 'leche_condensada') sauceColor = 0xfef08a;
+    if (prepared.sauce === 'maracuya_salsa') sauceColor = 0xeab308;
+    if (prepared.sauce === 'pistacho_salsa') sauceColor = 0x22c55e;
 
     const sauceMat = new THREE.MeshStandardMaterial({
       color: sauceColor,
@@ -326,6 +378,95 @@ export function createIceCream3D(prepared: PreparedIceCream, isSoftwareGl: boole
       straw.position.set(topScoopPos.x, topScoopPos.y + scoopRadius + 0.05, topScoopPos.z + 0.08);
       straw.rotation.set(0.3, 0, 0.3);
       root.add(straw);
+    } else if (topId === 'mani') {
+      // Crushed peanuts
+      const nutGeo = new THREE.DodecahedronGeometry(0.025, 0);
+      const nutMat = new THREE.MeshStandardMaterial({ color: 0xfbbf24, roughness: 0.7 });
+      for (let i = 0; i < 14; i++) {
+        const mesh = new THREE.Mesh(nutGeo, nutMat);
+        const theta = i * 1.9;
+        const r = (i / 14) * (scoopRadius * 0.8);
+        const sx = topScoopPos.x + Math.cos(theta) * r;
+        const sz = topScoopPos.z + Math.sin(theta) * r;
+        const sy = topScoopPos.y + scoopRadius * 0.85;
+        mesh.position.set(sx, sy, sz);
+        root.add(mesh);
+      }
+    } else if (topId === 'masmelos') {
+      // Mini pastel marshmallows
+      const mGeo = new THREE.CylinderGeometry(0.032, 0.032, 0.045, 10);
+      const mColors = [0xfce7f3, 0xffffff, 0xe0f2fe, 0xfef9c3];
+      for (let i = 0; i < 8; i++) {
+        const mMat = new THREE.MeshStandardMaterial({ color: mColors[i % mColors.length], roughness: 0.5 });
+        const mesh = new THREE.Mesh(mGeo, mMat);
+        const angle = (i / 8) * Math.PI * 2;
+        mesh.position.set(
+          topScoopPos.x + Math.cos(angle) * 0.14,
+          topScoopPos.y + scoopRadius * 0.82,
+          topScoopPos.z + Math.sin(angle) * 0.14
+        );
+        mesh.rotation.set(0.3, angle, 0.2);
+        root.add(mesh);
+      }
+    } else if (topId === 'arandanos') {
+      // Fresh blueberries
+      const bGeo = new THREE.SphereGeometry(0.035, 10, 10);
+      const bMat = new THREE.MeshStandardMaterial({ color: 0x312e81, roughness: 0.25 });
+      for (let i = 0; i < 6; i++) {
+        const angle = (i / 6) * Math.PI * 2;
+        const mesh = new THREE.Mesh(bGeo, bMat);
+        mesh.position.set(
+          topScoopPos.x + Math.cos(angle) * 0.12,
+          topScoopPos.y + scoopRadius * 0.88,
+          topScoopPos.z + Math.sin(angle) * 0.12
+        );
+        root.add(mesh);
+      }
+    } else if (topId === 'coco_rallado') {
+      // Shredded white coconut flakes
+      const cGeo = new THREE.BoxGeometry(0.012, 0.008, 0.06);
+      const cMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.6 });
+      for (let i = 0; i < 18; i++) {
+        const mesh = new THREE.Mesh(cGeo, cMat);
+        const theta = i * 2.1;
+        const r = (i / 18) * (scoopRadius * 0.85);
+        mesh.position.set(
+          topScoopPos.x + Math.cos(theta) * r,
+          topScoopPos.y + scoopRadius * 0.9,
+          topScoopPos.z + Math.sin(theta) * r
+        );
+        mesh.rotation.y = theta;
+        root.add(mesh);
+      }
+    } else if (topId === 'gomitas') {
+      // Colorful gummy bears
+      const gGeo = new THREE.SphereGeometry(0.04, 10, 10);
+      const gColors = [0xef4444, 0x22c55e, 0xeab308, 0xa855f7];
+      for (let i = 0; i < 5; i++) {
+        const gMat = new THREE.MeshStandardMaterial({ color: gColors[i % gColors.length], roughness: 0.15 });
+        const mesh = new THREE.Mesh(gGeo, gMat);
+        const angle = (i / 5) * Math.PI * 2;
+        mesh.position.set(
+          topScoopPos.x + Math.cos(angle) * 0.13,
+          topScoopPos.y + scoopRadius * 0.86,
+          topScoopPos.z + Math.sin(angle) * 0.13
+        );
+        root.add(mesh);
+      }
+    } else if (topId === 'choco_chips') {
+      // Chocolate drops
+      const chGeo = new THREE.ConeGeometry(0.025, 0.045, 8);
+      const chMat = new THREE.MeshStandardMaterial({ color: 0x270e02, roughness: 0.4 });
+      for (let i = 0; i < 10; i++) {
+        const mesh = new THREE.Mesh(chGeo, chMat);
+        const angle = (i / 10) * Math.PI * 2;
+        mesh.position.set(
+          topScoopPos.x + Math.cos(angle) * 0.14,
+          topScoopPos.y + scoopRadius * 0.85,
+          topScoopPos.z + Math.sin(angle) * 0.14
+        );
+        root.add(mesh);
+      }
     }
   });
 

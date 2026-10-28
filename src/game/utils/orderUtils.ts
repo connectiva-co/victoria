@@ -10,6 +10,12 @@ export const FLAVOR_ICONS: Record<string, string> = {
   maracuya: '🍋',
   menta: '🌿',
   brownie: '🍪',
+  pistacho: '🥜',
+  mora: '🫐',
+  chicle: '🫧',
+  cafe: '☕',
+  coco_helado: '🥥',
+  cookies_cream: '🍪',
 };
 
 export const CONTAINER_ICONS: Record<ContainerType, string> = {
@@ -17,6 +23,9 @@ export const CONTAINER_ICONS: Record<ContainerType, string> = {
   vaso: '🍧',
   copa: '🍨',
   waffle: '🧇',
+  canasta: '🥧',
+  banana_boat: '🍌',
+  coco: '🥥',
 };
 
 export const CONTAINER_NAMES: Record<ContainerType, string> = {
@@ -24,6 +33,9 @@ export const CONTAINER_NAMES: Record<ContainerType, string> = {
   vaso: 'Vaso',
   copa: 'Copa',
   waffle: 'Waffle',
+  canasta: 'Canasta',
+  banana_boat: 'Barco Banana',
+  coco: 'Coco',
 };
 
 export interface GroupedFlavor {
@@ -68,6 +80,10 @@ export function getSauceInfo(id: SauceId) {
   if (id === 'arequipe') shortName = 'Caramelo';
   else if (id === 'chocolate') shortName = 'Chocolate';
   else if (id === 'fresa') shortName = 'Fresa';
+  else if (id === 'mora') shortName = 'Mora';
+  else if (id === 'leche_condensada') shortName = 'Leche Condensada';
+  else if (id === 'maracuya_salsa') shortName = 'Maracuyá';
+  else if (id === 'pistacho_salsa') shortName = 'Pistacho';
 
   return {
     id,
@@ -84,7 +100,7 @@ export function getSauceInfo(id: SauceId) {
  */
 export function formatCustomerOrderSpeech(order: Order): string {
   const container = CONTAINER_NAMES[order.targetContainer] || 'Helado';
-  const article = order.targetContainer === 'copa' ? 'una' : 'un';
+  const article = order.targetContainer === 'copa' || order.targetContainer === 'canasta' ? 'una' : 'un';
 
   const grouped = getGroupedFlavors(order.targetFlavors);
   const flavorParts = grouped.map((g) => {

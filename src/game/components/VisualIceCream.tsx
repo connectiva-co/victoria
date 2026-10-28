@@ -108,6 +108,34 @@ export const VisualIceCream: React.FC<VisualIceCreamProps> = ({
             <stop offset="100%" stopColor="#9f1239" />
           </linearGradient>
 
+          {/* Mora Wildberry Syrup Shimmer */}
+          <linearGradient id="moraSyrup" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#c084fc" />
+            <stop offset="45%" stopColor="#7e22ce" />
+            <stop offset="100%" stopColor="#4c1d95" />
+          </linearGradient>
+
+          {/* Leche Condensada Sweet Cream Shimmer */}
+          <linearGradient id="condensadaSyrup" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#ffffff" />
+            <stop offset="50%" stopColor="#fef9c3" />
+            <stop offset="100%" stopColor="#fde047" />
+          </linearGradient>
+
+          {/* Maracuya Passionfruit Glaze Shimmer */}
+          <linearGradient id="maracuyaSyrup" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#fef08a" />
+            <stop offset="50%" stopColor="#eab308" />
+            <stop offset="100%" stopColor="#a16207" />
+          </linearGradient>
+
+          {/* Pistacho Cream Sauce Shimmer */}
+          <linearGradient id="pistachoSyrup" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#bbf7d0" />
+            <stop offset="50%" stopColor="#22c55e" />
+            <stop offset="100%" stopColor="#15803d" />
+          </linearGradient>
+
           {/* Dynamic Scoop Shaders for each flavor */}
           {INITIAL_FLAVORS.map((fl) => (
             <radialGradient key={fl.id} id={`scoopGrad_${fl.id}`} cx="35%" cy="30%" r="70%">
@@ -304,6 +332,85 @@ export const VisualIceCream: React.FC<VisualIceCreamProps> = ({
           </g>
         )}
 
+        {container === 'canasta' && (
+          <g id="CookieBasketLayer">
+            {/* Scalloped Waffle Cookie Bowl */}
+            <path
+              d="M62 212 Q68 318 140 326 Q212 318 218 212 Z"
+              fill="url(#waffleConeRealistic)"
+              stroke="#78350f"
+              strokeWidth="2.5"
+            />
+            {/* Waffle weave diagonal crosshatch */}
+            <g opacity="0.55">
+              {[0, 1, 2, 3, 4, 5].map((i) => (
+                <React.Fragment key={i}>
+                  <line x1={76 + i * 24} y1="216" x2={96 + i * 16} y2="318" stroke="#451a03" strokeWidth="2.2" />
+                  <line x1={204 - i * 24} y1="216" x2={184 - i * 16} y2="318" stroke="#451a03" strokeWidth="2.2" />
+                </React.Fragment>
+              ))}
+            </g>
+            {/* Wavy fluted cookie rim */}
+            <path
+              d="M58 212 Q72 198 86 212 Q100 198 114 212 Q128 198 140 212 Q152 198 166 212 Q180 198 194 212 Q208 198 222 212"
+              fill="#f59e0b"
+              stroke="#78350f"
+              strokeWidth="3"
+              strokeLinecap="round"
+            />
+            <ellipse cx="140" cy="326" rx="54" ry="9" fill="#78350f" opacity="0.5" />
+          </g>
+        )}
+
+        {container === 'banana_boat' && (
+          <g id="BananaSplitBoatLayer">
+            {/* Glass/Ceramic Oval Boat Dish Base */}
+            <ellipse cx="140" cy="326" rx="88" ry="16" fill="#fbcfe8" stroke="#f472b6" strokeWidth="2" />
+            {/* Front & Back Banana Halves */}
+            <path
+              d="M42 238 Q90 296 140 296 Q190 296 238 238 Q224 222 190 250 Q140 272 90 250 Q56 222 42 238 Z"
+              fill="#fef08a"
+              stroke="#eab308"
+              strokeWidth="2.5"
+            />
+            <path
+              d="M48 242 Q90 286 140 286 Q190 286 232 242"
+              stroke="#fde047"
+              strokeWidth="5"
+              fill="none"
+              strokeLinecap="round"
+            />
+            {/* Boat Dish Translucent Rim */}
+            <path
+              d="M46 254 C62 328 218 328 234 254 C194 274 86 274 46 254 Z"
+              fill="url(#crystalGlass)"
+              stroke="#f472b6"
+              strokeWidth="2.5"
+            />
+          </g>
+        )}
+
+        {container === 'coco' && (
+          <g id="CoconutShellLayer">
+            {/* Woven straw ring stand */}
+            <ellipse cx="140" cy="332" rx="52" ry="11" fill="#d97706" stroke="#78350f" strokeWidth="2" />
+            {/* Natural Brown Coconut Shell */}
+            <path
+              d="M66 210 C66 322 214 322 214 210 Z"
+              fill="#451a03"
+              stroke="#270e02"
+              strokeWidth="3"
+            />
+            {/* Coconut Fiber Texture Ridges */}
+            <path d="M84 235 Q102 292 128 308" stroke="#78350f" strokeWidth="2.5" fill="none" opacity="0.75" />
+            <path d="M196 235 Q178 292 152 308" stroke="#78350f" strokeWidth="2.5" fill="none" opacity="0.75" />
+            <path d="M114 228 Q130 285 140 310" stroke="#92400e" strokeWidth="2" fill="none" opacity="0.6" />
+            {/* Thick Creamy White Coconut Meat Rim */}
+            <ellipse cx="140" cy="210" rx="74" ry="14" fill="#78350f" stroke="#270e02" strokeWidth="2" />
+            <ellipse cx="140" cy="210" rx="68" ry="10" fill="#ffffff" stroke="#e2e8f0" strokeWidth="2" />
+          </g>
+        )}
+
         {/* 3. REALISTIC ICE CREAM SCOOPS */}
         {prepared.scoops.map((scoop, index) => {
           const flavor = INITIAL_FLAVORS.find((f) => f.id === scoop.flavor) || INITIAL_FLAVORS[0];
@@ -311,11 +418,11 @@ export const VisualIceCream: React.FC<VisualIceCreamProps> = ({
           let cy = 190 - index * 58;
           let cx = 140;
 
-          if (container === 'copa' && prepared.scoops.length === 3) {
+          if ((container === 'copa' || container === 'canasta' || container === 'coco') && prepared.scoops.length === 3) {
             if (index === 0) { cx = 110; cy = 180; }
             else if (index === 1) { cx = 170; cy = 180; }
             else { cx = 140; cy = 132; }
-          } else if (container === 'waffle') {
+          } else if (container === 'waffle' || container === 'banana_boat') {
             if (prepared.scoops.length === 1) {
               cx = 140;
               cy = 215;
@@ -351,18 +458,18 @@ export const VisualIceCream: React.FC<VisualIceCreamProps> = ({
               <ellipse cx={cx - 18} cy={cy + 8} rx="12" ry="5" fill={flavor.secondaryColor} opacity="0.4" />
               <ellipse cx={cx + 20} cy={cy + 12} rx="10" ry="4" fill={flavor.secondaryColor} opacity="0.35" />
 
-              {/* Strawberry seeds / fruit speckles for Fresa and Mango */}
-              {flavor.id === 'fresa' && (
+              {/* Strawberry seeds / fruit speckles for Fresa, Mora and Pistacho */}
+              {(flavor.id === 'fresa' || flavor.id === 'mora' || flavor.id === 'pistacho') && (
                 <g opacity="0.7">
-                  <circle cx={cx - 14} cy={cy - 12} r="1.5" fill="#fef08a" />
-                  <circle cx={cx + 12} cy={cy - 8} r="1.5" fill="#fef08a" />
-                  <circle cx={cx - 5} cy={cy + 14} r="1.5" fill="#fef08a" />
-                  <circle cx={cx + 18} cy={cy + 2} r="1.5" fill="#fef08a" />
+                  <circle cx={cx - 14} cy={cy - 12} r="1.5" fill={flavor.id === 'pistacho' ? '#15803d' : '#fef08a'} />
+                  <circle cx={cx + 12} cy={cy - 8} r="1.5" fill={flavor.id === 'pistacho' ? '#15803d' : '#fef08a'} />
+                  <circle cx={cx - 5} cy={cy + 14} r="1.5" fill={flavor.id === 'pistacho' ? '#15803d' : '#fef08a'} />
+                  <circle cx={cx + 18} cy={cy + 2} r="1.5" fill={flavor.id === 'pistacho' ? '#15803d' : '#fef08a'} />
                 </g>
               )}
 
-              {/* Chocolate chunks for Chocolate, Brownie and Menta */}
-              {(flavor.id === 'chocolate' || flavor.id === 'brownie' || flavor.id === 'menta') && (
+              {/* Chocolate chunks for Chocolate, Brownie, Menta, and Cookies & Cream */}
+              {(flavor.id === 'chocolate' || flavor.id === 'brownie' || flavor.id === 'menta' || flavor.id === 'cookies_cream') && (
                 <g fill="#270e02" opacity="0.8">
                   <rect x={cx - 20} y={cy - 10} width="6" height="5" rx="1.5" transform={`rotate(15 ${cx - 20} ${cy - 10})`} />
                   <rect x={cx + 15} y={cy - 6} width="7" height="6" rx="2" transform={`rotate(-25 ${cx + 15} ${cy - 6})`} />
@@ -390,9 +497,9 @@ export const VisualIceCream: React.FC<VisualIceCreamProps> = ({
           <g id="RealisticSauceLayer">
             {(() => {
               const topY =
-                container === 'copa' && prepared.scoops.length === 3
+                (container === 'copa' || container === 'canasta' || container === 'coco') && prepared.scoops.length === 3
                   ? 132
-                  : container === 'waffle'
+                  : container === 'waffle' || container === 'banana_boat'
                   ? prepared.scoops.length === 1
                     ? 215
                     : prepared.scoops.length === 2
@@ -408,6 +515,18 @@ export const VisualIceCream: React.FC<VisualIceCreamProps> = ({
               } else if (prepared.sauce === 'fresa') {
                 sFill = 'url(#fresaSyrup)';
                 sHighlight = '#fda4af';
+              } else if (prepared.sauce === 'mora') {
+                sFill = 'url(#moraSyrup)';
+                sHighlight = '#e9d5ff';
+              } else if (prepared.sauce === 'leche_condensada') {
+                sFill = 'url(#condensadaSyrup)';
+                sHighlight = '#ffffff';
+              } else if (prepared.sauce === 'maracuya_salsa') {
+                sFill = 'url(#maracuyaSyrup)';
+                sHighlight = '#fef08a';
+              } else if (prepared.sauce === 'pistacho_salsa') {
+                sFill = 'url(#pistachoSyrup)';
+                sHighlight = '#bbf7d0';
               }
 
               return (
@@ -440,9 +559,9 @@ export const VisualIceCream: React.FC<VisualIceCreamProps> = ({
         {/* 5. TOPPINGS (High-fidelity Realistic Render) */}
         {prepared.toppings.map((topId) => {
           const topY =
-            container === 'copa' && prepared.scoops.length === 3
+            (container === 'copa' || container === 'canasta' || container === 'coco') && prepared.scoops.length === 3
               ? 132
-              : container === 'waffle'
+              : container === 'waffle' || container === 'banana_boat'
               ? prepared.scoops.length === 1
                 ? 215
                 : prepared.scoops.length === 2
@@ -569,6 +688,155 @@ export const VisualIceCream: React.FC<VisualIceCreamProps> = ({
                 <circle cx="-4" cy="-6" r="1.2" fill="#fef08a" />
                 <circle cx="4" cy="-6" r="1.2" fill="#fef08a" />
                 <circle cx="0" cy="2" r="1.2" fill="#fef08a" />
+              </g>
+            );
+          }
+
+          if (topId === 'mani') {
+            return (
+              <g key={topId} id="RealisticPeanuts">
+                {[
+                  { x: 112, y: topY - 22, r: 18 },
+                  { x: 132, y: topY - 28, r: -25 },
+                  { x: 154, y: topY - 20, r: 40 },
+                  { x: 120, y: topY - 4, r: -10 },
+                  { x: 146, y: topY - 6, r: 30 },
+                  { x: 164, y: topY + 4, r: -35 },
+                  { x: 116, y: topY + 12, r: 22 },
+                  { x: 138, y: topY + 14, r: -15 },
+                ].map((p, idx) => (
+                  <ellipse
+                    key={idx}
+                    cx={p.x}
+                    cy={p.y}
+                    rx="5"
+                    ry="3.2"
+                    fill="#fbbf24"
+                    stroke="#92400e"
+                    strokeWidth="1.2"
+                    transform={`rotate(${p.r} ${p.x} ${p.y})`}
+                  />
+                ))}
+              </g>
+            );
+          }
+
+          if (topId === 'masmelos') {
+            return (
+              <g key={topId} id="RealisticMarshmallows">
+                {[
+                  { x: 108, y: topY - 24, c: '#fce7f3', s: '#f472b6', r: -15 },
+                  { x: 130, y: topY - 32, c: '#ffffff', s: '#cbd5e1', r: 12 },
+                  { x: 152, y: topY - 26, c: '#e0f2fe', s: '#38bdf8', r: 22 },
+                  { x: 122, y: topY - 8, c: '#fef9c3', s: '#facc15', r: -8 },
+                  { x: 148, y: topY - 6, c: '#fce7f3', s: '#f472b6', r: 16 },
+                ].map((m, idx) => (
+                  <rect
+                    key={idx}
+                    x={m.x}
+                    y={m.y}
+                    width="12"
+                    height="10"
+                    rx="3.5"
+                    fill={m.c}
+                    stroke={m.s}
+                    strokeWidth="1.2"
+                    transform={`rotate(${m.r} ${m.x + 6} ${m.y + 5})`}
+                  />
+                ))}
+              </g>
+            );
+          }
+
+          if (topId === 'arandanos') {
+            return (
+              <g key={topId} id="RealisticBlueberries">
+                {[
+                  { x: 115, y: topY - 20 },
+                  { x: 138, y: topY - 28 },
+                  { x: 160, y: topY - 16 },
+                  { x: 126, y: topY - 2 },
+                  { x: 150, y: topY + 2 },
+                ].map((b, idx) => (
+                  <g key={idx}>
+                    <circle cx={b.x} cy={b.y} r="6.5" fill="#312e81" stroke="#1e1b4b" strokeWidth="1.2" />
+                    <circle cx={b.x - 2} cy={b.y - 2} r="2" fill="#818cf8" opacity="0.8" />
+                  </g>
+                ))}
+              </g>
+            );
+          }
+
+          if (topId === 'coco_rallado') {
+            return (
+              <g key={topId} id="RealisticShreddedCoconut">
+                {[
+                  { x: 118, y: topY - 28, r: 15 },
+                  { x: 136, y: topY - 34, r: -20 },
+                  { x: 154, y: topY - 26, r: 35 },
+                  { x: 110, y: topY - 12, r: -40 },
+                  { x: 130, y: topY - 14, r: 10 },
+                  { x: 150, y: topY - 10, r: -15 },
+                  { x: 166, y: topY - 8, r: 28 },
+                  { x: 124, y: topY + 4, r: -25 },
+                  { x: 144, y: topY + 6, r: 18 },
+                ].map((c, idx) => (
+                  <path
+                    key={idx}
+                    d={`M${c.x} ${c.y} Q${c.x + 6} ${c.y - 3} ${c.x + 12} ${c.y + 1}`}
+                    stroke="#ffffff"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    fill="none"
+                    transform={`rotate(${c.r} ${c.x} ${c.y})`}
+                  />
+                ))}
+              </g>
+            );
+          }
+
+          if (topId === 'gomitas') {
+            return (
+              <g key={topId} id="RealisticGummyBears">
+                {[
+                  { x: 112, y: topY - 16, c: '#ef4444', r: -18 },
+                  { x: 140, y: topY - 24, c: '#22c55e', r: 10 },
+                  { x: 164, y: topY - 14, c: '#eab308', r: 24 },
+                  { x: 128, y: topY + 4, c: '#a855f7', r: -10 },
+                ].map((g, idx) => (
+                  <g key={idx} transform={`translate(${g.x}, ${g.y}) rotate(${g.r})`}>
+                    <circle cx="-4" cy="-7" r="3" fill={g.c} />
+                    <circle cx="4" cy="-7" r="3" fill={g.c} />
+                    <circle cx="0" cy="-4" r="5.5" fill={g.c} />
+                    <rect x="-5" y="0" width="10" height="9" rx="4" fill={g.c} />
+                    <circle cx="-2" cy="-5" r="1.5" fill="#ffffff" opacity="0.6" />
+                  </g>
+                ))}
+              </g>
+            );
+          }
+
+          if (topId === 'choco_chips') {
+            return (
+              <g key={topId} id="RealisticChocoChips">
+                {[
+                  { x: 116, y: topY - 22 },
+                  { x: 136, y: topY - 30 },
+                  { x: 158, y: topY - 20 },
+                  { x: 124, y: topY - 6 },
+                  { x: 148, y: topY - 4 },
+                  { x: 112, y: topY + 8 },
+                  { x: 138, y: topY + 12 },
+                  { x: 162, y: topY + 8 },
+                ].map((ch, idx) => (
+                  <path
+                    key={idx}
+                    d={`M${ch.x} ${ch.y - 6} C${ch.x + 5} ${ch.y} ${ch.x + 5} ${ch.y + 4} ${ch.x} ${ch.y + 4} C${ch.x - 5} ${ch.y + 4} ${ch.x - 5} ${ch.y} ${ch.x} ${ch.y - 6} Z`}
+                    fill="#270e02"
+                    stroke="#451a03"
+                    strokeWidth="0.8"
+                  />
+                ))}
               </g>
             );
           }
