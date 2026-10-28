@@ -1,0 +1,152 @@
+{
+  "project": {
+    "name": "Victoria's Ice Cream World",
+    "language": "es-CO",
+    "type": "offline-first PWA game",
+    "genre": ["simulacion de cocina", "gestion casual", "minijuegos"],
+    "audience": "7+",
+    "primary_goal": "Crear un videojuego real, jugable e instalable, no una maqueta ni landing page",
+    "main_character": {
+      "name": "Victoria",
+      "role": "duena y chef de una heladeria",
+      "visual_style": "3D estilizado, infantil, expresivo, colores pastel",
+      "reference_photo": "opcional; solicitar foto antes de intentar reproducir rasgos personales",
+      "animations": ["idle", "caminar", "preparar", "entregar", "celebrar", "sorpresa"],
+      "customization": ["peinados", "delantales", "ropa", "accesorios"]
+    },
+    "gameplay_loop": ["recibir pedido", "leer receta", "seleccionar recipiente", "manipular utensilios", "servir sabores", "agregar toppings", "entregar", "evaluar", "cobrar", "ganar experiencia", "mejorar tienda"],
+    "modes": {
+      "career": "jornadas con clientes, pedidos y progresion",
+      "creative": "preparacion libre sin tiempo ni penalizaciones",
+      "relaxed": "pedidos sin limite estricto de tiempo",
+      "minigames": ["memoria de ingredientes", "decoracion", "precision", "concurso de recetas"]
+    },
+    "mechanics": {
+      "orders": {
+        "fields": ["id", "customerId", "recipeId", "ingredients", "container", "toppings", "targetSeconds", "reward"],
+        "scoring": {"recipe_accuracy": 0.55, "presentation": 0.25, "speed": 0.20},
+        "patience": "incrementar tolerancia en niveles iniciales; reducir gradualmente",
+        "feedback": ["estrellas", "monedas", "experiencia", "reaccion del cliente"]
+      },
+      "interactive_tools": [
+        {"id": "scoop", "name": "cuchara", "interaction": "arrastrar y soltar bolas de helado"},
+        {"id": "soft_serve", "name": "dispensador", "interaction": "mantener presionado y soltar al alcanzar cantidad"},
+        {"id": "toppings", "name": "dispensador de toppings", "interaction": "tocar o arrastrar para dosificar"},
+        {"id": "sauces", "name": "dispensador de salsas", "interaction": "trazar sobre el helado"},
+        {"id": "blender", "name": "licuadora", "interaction": "seleccionar ingredientes y activar mezcla", "unlockLevel": 5},
+        {"id": "freezer", "name": "congelador", "interaction": "seleccionar y reponer ingredientes"}
+      ],
+      "ingredients": {
+        "starting_flavors": ["vainilla", "chocolate", "fresa", "mango", "arequipe"],
+        "containers": ["cono", "vaso", "copa"],
+        "starting_toppings": ["chispas", "cereza", "galleta", "crema batida"],
+        "unlockable": ["maracuya", "menta", "brownie", "caramelo", "waffles", "frutas especiales"]
+      },
+      "recipes": {
+        "data_driven": true,
+        "fields": ["id", "name", "container", "flavors", "toppings", "steps", "price", "xp", "unlockLevel"],
+        "discovery": "combinaciones validas se agregan al recetario",
+        "starter_count": 10
+      },
+      "customers": {
+        "starter_count": 5,
+        "personalities": ["tranquilo", "impaciente", "exigente", "habitual", "especial"],
+        "behaviors": ["entrar", "hacer fila", "pedir", "esperar", "reaccionar", "salir"],
+        "avoid": ["superposicion de personajes", "atravesar muebles", "personajes visualmente identicos"]
+      },
+      "economy": {
+        "currency": "monedas virtuales",
+        "earn_from": ["pedidos", "misiones", "logros", "minijuegos"],
+        "spend_on": ["ingredientes", "mejoras", "decoracion", "accesorios"],
+        "real_money_purchases": false,
+        "forced_ads": false
+      },
+      "progression": {
+        "xp_levels": true,
+        "unlockables": ["sabores", "recetas", "utensilios", "decoracion", "zonas", "sucursales"],
+        "business_stages": ["local de barrio", "heladeria moderna", "heladeria con mesas", "centro comercial", "local tematico", "cadena Victoria"],
+        "daily_missions": true,
+        "achievements": true,
+        "offline_daily_reset": "basado en fecha local, sin bloquear el juego si cambia el reloj"
+      },
+      "shop_customization": ["paredes", "pisos", "mesas", "sillas", "vitrinas", "iluminacion", "fachada"],
+      "seasonal_events": "eventos descargables opcionales; contenido base disponible offline"
+    },
+    "ui_ux": {
+      "style": "moderno, visual, intuitivo, colorido sin saturacion",
+      "screens": ["inicio", "continuar", "heladeria", "pedidos", "recetario", "inventario", "tienda", "misiones", "logros", "perfil", "configuracion", "pausa", "resumen de jornada"],
+      "mobile": {"orientation": "horizontal preferida", "touch": true, "drag_and_drop": true, "safe_areas": true, "prevent_page_scroll": true},
+      "desktop": {"mouse": true, "keyboard_shortcuts": true},
+      "accessibility": ["texto legible", "alto contraste", "reducir movimiento", "modo relajado", "volumen separado", "tutorial interactivo", "controles ajustables"],
+      "themes": ["claro", "oscuro opcional"]
+    },
+    "visual_audio": {
+      "camera": "isometrica 3D, con movimientos limitados y suaves",
+      "art": "personajes consistentes, utensilios legibles, sombras ligeras, texturas optimizadas",
+      "sound": ["musica de fondo", "utensilios", "monedas", "entregas", "reacciones", "celebraciones"],
+      "animation_requirements": ["sin deformaciones", "sin huecos negros", "sin clipping", "sin saltos abruptos"]
+    },
+    "technical": {
+      "stack": ["Vite", "React", "TypeScript", "Three.js", "Tailwind CSS", "Zustand", "Dexie/IndexedDB", "Service Worker"],
+      "architecture": ["rendering", "game-logic", "data", "ui", "audio", "persistence", "tests"],
+      "offline_first": true,
+      "installable_pwa": true,
+      "asset_cache": "precargar y cachear recursos esenciales para partidas offline tras primera instalacion",
+      "autosave": "despues de cada pedido y cambio importante",
+      "recovery": "restaurar partida tras cierre inesperado",
+      "performance": {"target_fps": 60, "minimum_target_fps_midrange": 30, "dynamic_quality": true, "device_testing_required": true},
+      "testing": ["Vitest para recetas/economia/progresion", "Playwright para flujo completo", "pruebas offline", "pruebas tactiles", "pruebas de guardado"],
+      "future_online_optional": {
+        "cloud_sync": "opt-in y con cuenta, resolver conflictos de guardado",
+        "global_leaderboard": "solo cuando haya conexion, validacion de puntajes en servidor",
+        "social_login": "opcional, nunca requisito para jugar",
+        "push_notifications": "opcional con consentimiento; no necesarias para completar el juego",
+        "privacy": "minimizar datos de menores, no exponer identidad real ni perfil publico por defecto"
+      }
+    },
+    "delivery_plan": [
+      {"phase": 1, "name": "vertical slice", "deliver": ["personaje", "escena", "controles", "primer pedido interactivo", "guardado local"]},
+      {"phase": 2, "name": "jornada jugable", "deliver": ["5 clientes", "5 sabores", "3 recipientes", "4 toppings", "3 utensilios", "10 recetas", "evaluacion"]},
+      {"phase": 3, "name": "progresion", "deliver": ["monedas", "xp", "5 misiones", "logros", "desbloqueos"]},
+      {"phase": 4, "name": "personalizacion", "deliver": ["decoracion", "mejoras", "perfil Victoria"]},
+      {"phase": 5, "name": "pulido", "deliver": ["sonidos", "animaciones", "minijuegos", "accesibilidad"]},
+      {"phase": 6, "name": "release offline", "deliver": ["PWA instalable", "cache", "pruebas moviles", "rendimiento", "correccion de bugs"]}
+    ],
+    "first_playable_mvp": {
+      "customers": 5,
+      "flavors": 5,
+      "containers": 3,
+      "toppings": 4,
+      "interactive_tools": 3,
+      "recipes": 10,
+      "missions": 5,
+      "must_complete_full_workday": true,
+      "acceptance_criteria": [
+        "Victoria aparece y se anima correctamente",
+        "los clientes entran, piden y salen sin colisiones visibles",
+        "el jugador manipula ingredientes y construye visualmente un helado",
+        "la evaluacion compara el producto real con el pedido",
+        "monedas, XP y misiones se actualizan correctamente",
+        "se puede terminar una jornada completa",
+        "el progreso se conserva al cerrar y reabrir",
+        "la PWA funciona offline tras instalar y cachear recursos",
+        "controles tactiles y mouse funcionan",
+        "no hay errores bloqueantes"
+      ]
+    },
+    "agent_instructions": {
+      "role": "Actua como Game Director, disenador UX/UI, desarrollador senior de videojuegos web, artista 3D y QA.",
+      "workflow": [
+        "Inspecciona el proyecto existente antes de modificar archivos.",
+        "Presenta arquitectura, estructura de carpetas y plan incremental.",
+        "Construye primero una vertical slice jugable; no simules interacciones con botones falsos.",
+        "Usa datos estructurados para recetas, clientes, misiones y progresion.",
+        "Implementa, ejecuta y prueba cada fase antes de continuar.",
+        "Prioriza funcionamiento offline y rendimiento movil.",
+        "Documenta comandos para ejecutar, compilar, probar e instalar la PWA.",
+        "No afirmes que algo funciona sin verificarlo; reporta limitaciones y pendientes."
+      ],
+      "start_now": "Implementa la fase 1 y luego la fase 2 hasta completar una jornada jugable. Si falta una fotografia de Victoria, usa un personaje temporal claramente reemplazable."
+    }
+  }
+}

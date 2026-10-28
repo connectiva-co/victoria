@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fdf2f8"/>
+      <stop offset="50%" stop-color="#fce7f3"/>
+      <stop offset="100%" stop-color="#fbcfe8"/>
+    </linearGradient>
+    <linearGradient id="coneGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fcd34d"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <linearGradient id="strawberryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f43f5e"/>
+      <stop offset="100%" stop-color="#be123c"/>
+    </linearGradient>
+    <linearGradient id="vanillaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="100%" stop-color="#fde047"/>
+    </linearGradient>
+    <linearGradient id="chocolateGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#78350f"/>
+      <stop offset="100%" stop-color="#451a03"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#831843" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <!-- Background Circle for Icon -->
+  <rect width="512" height="512" rx="128" fill="url(#bgGrad)"/>
+  
+  <!-- Outer Decorative Ring -->
+  <circle cx="256" cy="256" r="230" fill="none" stroke="#f472b6" stroke-width="6" stroke-dasharray="16 12" opacity="0.4"/>
+
+  <!-- Ice Cream Waffle Cone -->
+  <g filter="url(#shadow)">
+    <!-- Cone Body -->
+    <polygon points="256,450 176,270 336,270" fill="url(#coneGrad)"/>
+    <!-- Cone Waffle Pattern Grid -->
+    <path d="M196,290 L316,400 M176,320 L296,430 M316,290 L196,400 M336,320 L216,430 M220,270 L280,440 M292,270 L240,440" stroke="#b45309" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
+    
+    <!-- Scoop 1 (Bottom Scoop: Chocolate / Arequipe) -->
+    <circle cx="256" cy="255" r="70" fill="url(#chocolateGrad)"/>
+    <ellipse cx="256" cy="275" rx="74" ry="20" fill="#451a03"/>
+
+    <!-- Scoop 2 (Middle Left: Mango / Vanilla) -->
+    <circle cx="215" cy="195" r="62" fill="url(#vanillaGrad)"/>
+    <ellipse cx="215" cy="215" rx="66" ry="16" fill="#ca8a04"/>
+
+    <!-- Scoop 3 (Middle Right: Strawberry) -->
+    <circle cx="295" cy="185" r="64" fill="url(#strawberryGrad)"/>
+    <ellipse cx="295" cy="205" rx="68" ry="16" fill="#9f1239"/>
+
+    <!-- Whipped Cream Swirl -->
+    <path d="M256,120 C230,120 235,160 256,160 C277,160 282,120 256,120 Z" fill="#ffffff"/>
+    <circle cx="256" cy="135" r="30" fill="#ffffff"/>
+
+    <!-- Cherry on Top -->
+    <circle cx="256" cy="100" r="24" fill="#e11d48"/>
+    <circle cx="250" cy="94" r="6" fill="#ffe4e6"/>
+    <!-- Cherry Stem -->
+    <path d="M256,92 C270,60 295,65 305,50" fill="none" stroke="#15803d" stroke-width="5" stroke-linecap="round"/>
+    <path d="M305,50 C315,55 315,68 300,62" fill="#22c55e"/>
+
+    <!-- Multi-colored Sprinkles -->
+    <!-- Turquoise sprinkle -->
+    <rect x="235" y="180" width="14" height="6" rx="3" fill="#06b6d4" transform="rotate(-25 235 180)"/>
+    <!-- Yellow sprinkle -->
+    <rect x="275" y="165" width="14" height="6" rx="3" fill="#facc15" transform="rotate(35 275 165)"/>
+    <!-- Purple sprinkle -->
+    <rect x="290" y="210" width="14" height="6" rx="3" fill="#a855f7" transform="rotate(-15 290 210)"/>
+    <!-- Pink sprinkle -->
+    <rect x="195" y="220" width="14" height="6" rx="3" fill="#ec4899" transform="rotate(40 195 220)"/>
+    <!-- Green sprinkle -->
+    <rect x="225" y="235" width="14" height="6" rx="3" fill="#10b981" transform="rotate(-30 225 235)"/>
+  </g>
+
+  <!-- Sparkles around -->
+  <polygon points="120,120 125,135 140,140 125,145 120,160 115,145 100,140 115,135" fill="#fbbf24"/>
+  <polygon points="390,140 393,150 405,153 393,156 390,168 387,156 375,153 387,150" fill="#fbbf24"/>
+  <polygon points="380,310 384,322 396,325 384,328 380,340 376,328 364,325 376,322" fill="#f472b6"/>
+</svg>

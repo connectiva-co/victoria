@@ -1,0 +1,6 @@
+{
+  "name": "Victoria's Ice Cream World",
+  "description": "Videojuego 3D de simulación y gestión de heladería con Victoria. Sirve helados artesanales, desbloquea recetas y completa jornadas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
